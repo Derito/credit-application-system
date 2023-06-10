@@ -3,6 +3,14 @@ spring:
     url: jdbc:h2:mem:credit_application_system_bd
     username: helder
     password:
+      # ddl-auto: create-drop, Cria as tabelas sempre que inicia o projecto e apaga no fim
+  jpa:
+    show-sql: true
+    hibernate:
+      properties:
+        hibernate.format_sql: true
+     # ddl-auto: create-drop
+# Alterado com o flyway para criação automatica de tabelas
   h2:
     console:
       enabled: true

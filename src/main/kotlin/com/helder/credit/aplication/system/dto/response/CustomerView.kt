@@ -1,4 +1,4 @@
-package com.helder.credit.aplication.system.controller
+package com.helder.credit.aplication.system.dto.response
 
 import com.helder.credit.aplication.system.entity.Customer
 import java.math.BigDecimal
