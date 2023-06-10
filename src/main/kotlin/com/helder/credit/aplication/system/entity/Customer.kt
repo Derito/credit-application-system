@@ -1,13 +1,33 @@
 package com.helder.credit.aplication.system.entity
 
-class Customer (
-    var firstName: String= "",
-    var lastName: String="",
-    val cpf: String,
-    var email: String="",
-    var password: String="",
-    var address: Address= Address(),
-    var credit: List<Credit> = mutableListOf(),
-    val id: Long? = null
+import jakarta.persistence.*
+import java.math.BigDecimal
 
+@Entity
+//@Table(name = "Cliente")
+class Customer(
+    @Column(nullable = false)
+    var firstName: String = "",
+    @Column(nullable = false)
+    var lastName: String = "",
+    @Column(nullable = false, unique = true)
+    var cpf: String="",
+    @Column(nullable = false, unique = true)
+    var email: String = "",
+    @Column(nullable = false)
+    var income: BigDecimal = BigDecimal.ZERO,
+    @Column(nullable = false)
+    var password: String = "",
+    //Embedded - significa que: A classe endereço foi adicionada a classe Cliente(Customer)
+    @Column(nullable = false)
+    @Embedded
+    var address: Address = Address(),
+    @Column(nullable = false)
+    @OneToMany(fetch = FetchType.LAZY,
+        cascade = arrayOf(CascadeType.REMOVE,CascadeType.PERSIST),
+        mappedBy = "customer")
+    var credits: List<Credit> = mutableListOf(),
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
 )
